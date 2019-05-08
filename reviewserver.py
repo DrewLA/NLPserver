@@ -6,9 +6,6 @@ from spacy.tokens import Token
 from math import isclose
 from monkeylearn import MonkeyLearn
 # Imports the Google Cloud client library
-from google.cloud import language
-from google.cloud.language import enums
-from google.cloud.language import types
 
 from spacy.lang.en.stop_words import STOP_WORDS
 from flask import Flask, request
