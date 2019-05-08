@@ -9,7 +9,7 @@ from monkeylearn import MonkeyLearn
 
 from spacy.lang.en.stop_words import STOP_WORDS
 from flask import Flask, request
-nlp_en = spacy.load('en_core_web_lg')
+nlp_en = spacy.load('en')
 ml = MonkeyLearn('3b2ae96a397cf0e07a62561b935d2b3baee6f4ba')
 model_id = 'cl_pi3C7JiL'
 app = Flask('reviewserver')
