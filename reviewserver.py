@@ -1,3 +1,6 @@
+# Arthur: Andrew Lewis
+# NLP server for Plectr
+
 import spacy
 from enum import Enum
 import pyrebase
@@ -42,6 +45,7 @@ class Rating(Enum):
     GOOD = 2
     VERY_GOOD = 3
 
+# Class holding data for token
 class LexiconEntry:
     _IS_REGEX_REGEX = re.compile(r'.*[.+*\[$^\\]')
 
@@ -53,7 +57,8 @@ class LexiconEntry:
         self.rating = rating
         self.is_regex = bool(LexiconEntry._IS_REGEX_REGEX.match(self.lemma))
         self._regex = re.compile(lemma, re.IGNORECASE) if self.is_regex else None
-
+    # Returns the score of the token being processed for a match
+    # Cutoof for lowest vakue is 0.65. (Best performing over trails)
     def matching(self, token: Token) -> float:
         """
         A weight between 0.0 and 1.0 on how much ``token`` matches this entry.
@@ -102,6 +107,9 @@ class LexiconEntry:
     def setRating(self, rating: Rating):
         self.rating = Rating    
 
+# This class defines a lexicon based filter using spacy's word vectoring 
+# similarity
+#
 class Lexicon:
     def __init__(self):
         self.entries: List[LexiconEntry] = []
@@ -157,10 +165,14 @@ lexicon.append('speak', Topic.EXPLANATION)
 lexicon.append('explanation', Topic.EXPLANATION)
 lexicon.append('concise', Topic.EXPLANATION)
 
+# Debugging
 @app.route('/base')
 def showStatus():
     return 'Ok'
 
+# Flask POST handler
+# receives reciew from app and processes score
+# writes new scores to database
 @app.route('/receive-review', methods=['POST'])
 def receiveReview():
 
@@ -215,7 +227,8 @@ def receiveReview():
 
 
     return updateDatabase(sections, tutorID, resultTag, ratingInt)
-    
+
+# Updates scores
 def updateDatabase(section, tutorID, resultTag, ratingInt):
     db = firebase.database()
     score = db.child("Users/students/"+tutorID+"/rating").get()
