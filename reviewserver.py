@@ -1,6 +1,8 @@
 # Arthur: Andrew Lewis
 # NLP server for Plectr
-
+# Dependencies: Pyrebase
+#               spacy
+#               spacy en model
 import spacy
 from enum import Enum
 import pyrebase
@@ -8,8 +10,8 @@ import re
 from spacy.tokens import Token
 from math import isclose
 from monkeylearn import MonkeyLearn
-# Imports the Google Cloud client library
 
+# Import language model
 from spacy.lang.en.stop_words import STOP_WORDS
 from flask import Flask, request
 nlp_en = spacy.load('en')
@@ -30,7 +32,7 @@ auth = firebase.auth()
 
 user = auth.sign_in_with_email_and_password('admin@admin.com', 'testserver')
 
-
+# Attribute Topics for extraction
 class Topic(Enum):
     KNOWLEDGE = 1
     SERVICE = 2
