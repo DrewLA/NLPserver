@@ -15,15 +15,15 @@ from monkeylearn import MonkeyLearn
 from spacy.lang.en.stop_words import STOP_WORDS
 from flask import Flask, request
 nlp_en = spacy.load('en')
-ml = MonkeyLearn('3b2ae96a397cf0e07a62561b935d2b3baee6f4ba')
+ml = MonkeyLearn('Insert api key here')
 model_id = 'cl_pi3C7JiL'
 app = Flask('reviewserver')
 
 config = {
-  "apiKey": "AIzaSyBj1p5goV6yxL73du1Bl0lI-ihdstZLFHM",
-  "authDomain": "plectr-8a45b.firebaseapp.com",
-  "databaseURL": "https://plectr-8a45b.firebaseio.com",
-  "storageBucket": "plectr-8a45b.appspot.com"
+  "apiKey": "Insert api keys here",
+  "authDomain": "plectr-8a45b.firebaseapp.com", # Disbaled servers left for demonstration
+  "databaseURL": "https://plectr-8a45b.firebaseio.com", # Disbaled servers left for demonstration
+  "storageBucket": "plectr-8a45b.appspot.com" # Disbaled servers left for demonstration
 }
 
 firebase = pyrebase.initialize_app(config)
